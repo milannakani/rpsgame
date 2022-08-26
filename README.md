@@ -1,2 +1,2 @@
 # rpsgame
-The rock paper scissor is going give me learning of programming world.
+The rock paper scissor is going to give me learning of programming world.
