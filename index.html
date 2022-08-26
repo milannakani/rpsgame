@@ -6,90 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissor</title>
 </head>
+<script src="./rpsgame.js" defer></script>
+<link rel="stylesheet" href="./style.css">
 <body>
-    <script>
-       function getComputerChoice () {
-            let choice = ["rock","paper","scissor"];
-            let random = Math.floor(Math.random()*choice.length);
-            return choice[random];
-        }
-        
-        let scoreMine = 0;
-        let scoreComputer = 0;
-          
-function playRound() {
-        let select = prompt("choose rock/paper/scissor:");
-        let playerSelection = select.toLowerCase();
-        let computerSelection = getComputerChoice();
-        if (playerSelection === "rock" && computerSelection === "rock") {
-            console.log("game tied");
-        }
-        else if (playerSelection === "rock" && computerSelection === "paper") {
-            console.log("ohh, you loose! Paper covers Rock");
-            scoreComputer++;
-        }
-        else if (playerSelection === "rock" && computerSelection === "scissor") {
-            console.log("Congrats, you Win, Rock cuts Scissor");
-            scoreMine++;
-        }
-        else if (playerSelection === "paper" && computerSelection === "scissor") {
-            console.log("ooh you loose! Scissor cuts Paper");
-            scoreComputer++;
-        }
-        else if (playerSelection === "paper" && computerSelection === "paper") {
-            console.log("game tied");
-        }
-        else if (playerSelection === "paper" && computerSelection === "rock") {
-            console.log("Congrats, you Win, Paper covers Rock");
-            scoreMine++;
-        }
-        else if (playerSelection === "scissor" && computerSelection === "rock") {
-            console.log("ooh you loose! Rock cuts Scissor");
-            scoreComputer++;
-        }
-        else if (playerSelection === "scissor" && computerSelection === "scissor") {
-            console.log("game tied");
-        }
-        else if (playerSelection === "scissor" && computerSelection === "paper") {
-            console.log("Congrats, you Win, Scissor cuts Paper");
-            scoreMine++;
-        }
-        else {
-            console.log("you have entered wrong tool!");   
-        }
-}
-function game() {
-        for (let i = 0; i < 5; i++) {
-        playRound();
-        }
-}
-    game();
-    console.log("My Score",scoreMine,"Computer Score",scoreComputer);
-
-function finalResult() {
-    if (scoreMine > scoreComputer) {
-        console.log("congratulation! you Won.");
-    }
-    else if (scoreMine < scoreComputer) {
-        console.log("Better luck next time! you loose");
-    }
-    else {
-        console.log("match tied!");
-    }
-}
-    finalResult();
-    
-    
-        
-    
-        
-            
-    
-
-
-        
-
-        
-    </script>
+    <section class="game">
+    <div class="title">Rock Paper Scissor</div>
+    <div class="score"> 
+      <div class="movestitle">  
+      <div class="move">Moves Left: 10</div>
+      </div>
+      <div class="scorecard">
+      <div class="playerScore">
+          <p>Player</p>
+          <p class="p-count count">0</p>
+      </div>      
+      <div class="computerScore">
+          <p>Computer</p>
+          <p class="c-count count">0</p>
+      </div>
+    </div>
+  </div>
+  <div class="resulteffect">
+  <div class="result">Playgame</div>
+    <div class="clickButtons">
+        <button class="btns" value="rock" id="rock" onclick="myFunction(this)">Rock</button>
+        <button class="btns" value="paper" id="paper" onclick="myFunction(this)">Paper</button>
+        <button class="btns" value="scissor" id="scissor" onclick="myFunction(this)">Scissor</button>
+    </div>
+    </div>
+    <div class="rBtn">
+    <button class="restartBtn"></button>
+    </div>
+</section>
+   
 </body>
 </html>

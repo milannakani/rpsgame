@@ -1,71 +1,105 @@
 
-function getComputerChoice () {
-     let choice = ["rock","paper","scissor"];
-     let random = Math.floor(Math.random()*choice.length);
-     return choice[random];
- }
- 
- let scoreMine = 0;
- let scoreComputer = 0;
-   
-function playRound() {
- let select = document.querySelector("rock")
- let playerSelection = select.toLowerCase();
- let computerSelection = getComputerChoice();
- if (playerSelection === "rock" && computerSelection === "rock") {
-     console.log("game tied");
- }
- else if (playerSelection === "rock" && computerSelection === "paper") {
-     console.log("ohh, you loose! Paper covers Rock");
-     scoreComputer++;
- }
- else if (playerSelection === "rock" && computerSelection === "scissor") {
-     console.log("Congrats, you Win, Rock cuts Scissor");
-     scoreMine++;
- }
- else if (playerSelection === "paper" && computerSelection === "scissor") {
-     console.log("ooh you loose! Scissor cuts Paper");
-     scoreComputer++;
- }
- else if (playerSelection === "paper" && computerSelection === "paper") {
-     console.log("game tied");
- }
- else if (playerSelection === "paper" && computerSelection === "rock") {
-     console.log("Congrats, you Win, Paper covers Rock");
-     scoreMine++;
- }
- else if (playerSelection === "scissor" && computerSelection === "rock") {
-     console.log("ooh you loose! Rock cuts Scissor");
-     scoreComputer++;
- }
- else if (playerSelection === "scissor" && computerSelection === "scissor") {
-     console.log("game tied");
- }
- else if (playerSelection === "scissor" && computerSelection === "paper") {
-     console.log("Congrats, you Win, Scissor cuts Paper");
-     scoreMine++;
- }
- else {
-     console.log("you have entered wrong tool!");   
- }
+const btn = document.querySelectorAll(".btns") // To click buttons to play game
+btn.forEach((btns) => {
+    btns.addEventListener("click", game);
+});
+    let x; // selecting values of button as player selection
+function myFunction(el) {
+    x = el.value;
 }
-function game() {
- for (let i = 0; i < 5; i++) {
- playRound();
+function getComputerChoice () { //computer choice selection
+    let choice = ["rock","paper","scissor"];
+    let random = Math.floor(Math.random()*choice.length);
+    return choice[random];
  }
-}
-game();
-console.log("My Score",scoreMine,"Computer Score",scoreComputer);
+    let scoreMine = 0;
+    let scoreComputer = 0;
+    let count = 1;  
+    let moves = 10; 
 
-function finalResult() {
-if (scoreMine > scoreComputer) {
- console.log("congratulation! you Won.");
+function playRound() { //game play with win/loss/tie criteria
+    let playerSelection = x;
+    let computerSelection = getComputerChoice();
+    const playerScoreBoard = document.querySelector('.p-count');
+    const computerScoreBoard = document.querySelector('.c-count');
+    const result = document.querySelector(".result");
+    if (playerSelection === "rock" && computerSelection === "rock") {
+        result.textContent = "Game Tied";
+    }
+    else if (playerSelection === "rock" && computerSelection === "paper") {
+        result.textContent = "Ohh, you loose! Paper covers Rock";
+        scoreComputer++;
+        computerScoreBoard.textContent = scoreComputer;
+    }
+    else if (playerSelection === "rock" && computerSelection === "scissor") {
+        result.textContent =  "Congrats, you Win, Rock cuts Scissor";
+        scoreMine++;
+        playerScoreBoard.textContent = scoreMine;
+    }
+    else if (playerSelection === "paper" && computerSelection === "scissor") {
+        result.textContent = "Ooh you loose! Scissor cuts Paper";
+        scoreComputer++;
+        computerScoreBoard.textContent = scoreComputer;
+    }
+    else if (playerSelection === "paper" && computerSelection === "paper") {
+        result.textContent = "Game Tied";
+    }
+    else if (playerSelection === "paper" && computerSelection === "rock") {
+        result.textContent = "Congrats, you Win, Paper covers Rock";
+        scoreMine++;
+        playerScoreBoard.textContent = scoreMine;
+    }
+    else if (playerSelection === "scissor" && computerSelection === "rock") {
+        result.textContent = "Ooh you loose! Rock cuts Scissor";
+        scoreComputer++;
+        computerScoreBoard.textContent = scoreComputer;
+    }
+    else if (playerSelection === "scissor" && computerSelection === "scissor") {
+        result.textContent = "Game Tied";
+    }
+    else if (playerSelection === "scissor" && computerSelection === "paper") {
+        result.textContent = "Congrats, you Win, Scissor cuts Paper";
+        scoreMine++;
+        playerScoreBoard.textContent = scoreMine;
+    }
 }
-else if (scoreMine < scoreComputer) {
- console.log("Better luck next time! you loose");
+
+function game() { //loop to play game for given number of times
+    const movesLeft = document.querySelector(".move");
+    const gameover = document.querySelector(".score"); 
+    const reloadBtn = document.querySelector(".restartBtn"); 
+    if (count <= 10) {
+        playRound();
+        movesLeft.textContent = "Moves Left: " + (moves-count);
+        count++;
+        if (count === 11) {
+        finalResult();
+        document.querySelector(".restartBtn").addEventListener("click", function() {
+            window.location.reload();});
+            reloadBtn.innerText = "Restart";
+            reloadBtn.style.display = "flex";
+            reloadBtn.style.fontSize = "1rem";
+        gameover.textContent = "Game Over!!";
+        }
+    }
 }
-else {
- console.log("match tied!");
+
+function finalResult() { //final result shown on screen
+    const resultEffect = document.querySelector(".resulteffect");
+    const result = document.querySelector(".result");
+    if (scoreMine > scoreComputer) {
+    resultEffect.textContent = "Congratulation! you Won.";
+    resultEffect.style.fontSize = "2rem";
+    resultEffect.style.color = 'green';
+    }
+    else if (scoreMine < scoreComputer) {
+    resultEffect.textContent = "Better luck next time! you loose";
+    resultEffect.style.fontSize = "2rem";
+    resultEffect.style.color = 'red';
+    }
+    else {
+    resultEffect.textContent = "Match Tied!";
+    resultEffect.style.fontSize = "2rem";
+    resultEffect.style.color = 'grey';
+    }
 }
-}
-finalResult();
